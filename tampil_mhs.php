@@ -4,7 +4,7 @@ include('koneksi.php');
 require_once('head.php');
 
 $username = $_SESSION['username'];
-$sql = "SELECT * FROM kelas join krs on kelas.kelas_id = krs.kelas_id join mahasiswa on krs.mahasiswa_id = mahasiswa.mahasiswa_id WHERE mahasiswa.nim = '$username' ";
+$sql = "SELECT * FROM angsuran join pembayaran on angsuran.angsuran_id = pembayaran.angsuran_id join mahasiswa on pembayaran.mahasiswa_id = mahasiswa.mahasiswa_id WHERE mahasiswa.nim = '$username' ORDER by angsuran.angsuran asc";
 
 
 ?>
@@ -43,19 +43,18 @@ $sql = "SELECT * FROM kelas join krs on kelas.kelas_id = krs.kelas_id join mahas
 <div class="card">
 <div class="card-header">
     <div class="pull-left">
-        <strong>Data Kelas</strong>
+        <strong>Data Angsuran</strong>
     </div>
 </div>
 <div class="card-body table-responsive">
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Kode Kelas</th>
-                <th>Kode Matkul</th>
-                <th>Nama Matkul</th>
-                <th>Tahun</th>
-                <th>Semester</th>
-                <th>Sks</th>
+                <th>Angsuran</th>
+                <th>Nominal</th>
+                <th>Denda</th>
+                <th>Sisa Angsuran</th>
+                <th>Jumlah Sisa Angsuran</th>
                 <th>Detail</th>
         
             </tr>
@@ -68,13 +67,12 @@ $sql = "SELECT * FROM kelas join krs on kelas.kelas_id = krs.kelas_id join mahas
                 while($row = $result->fetch_assoc()){
             ?>
                 <tr>
-                    <td><?php echo $row ['kode_kelas'] ?></td>
-                    <td><?php echo $row ['kode_matkul'] ?></td>
-                    <td><?php echo $row ['nama_matkul'] ?></td>
-                    <td><?php echo $row ['tahun'] ?></td>
-                    <td><?php echo $row ['semester'] ?></td>
-                    <td><?php echo $row ['sks'] ?></td>
-                    <td><a href="detail_mhs.php?kelas_id=<?= $row['kelas_id']; ?>" class="btn btn-primary">Detail</a>
+                    <td><?php echo $row ['angsuran'] ?></td>
+                    <td><?php echo $row ['nominal'] ?></td>
+                    <td><?php echo $row ['denda'] ?></td>
+                    <td><?php echo $row ['sisa_angsuran'] ?></td>
+                    <td><?php echo $row ['jmlh_sisa_angsuran'] ?></td>
+                    <td><a href="#" class="btn btn-primary">Detail</a>
                     </td>
                 </tr>
 

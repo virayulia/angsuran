@@ -3,7 +3,7 @@
 include('koneksi.php');
 require_once('head.php');
 
-$sql="SELECT * FROM kelas ORDER by tahun desc, semester desc";
+$sql="SELECT * FROM angsuran ORDER by angsuran asc";
 ?>
 <body>
     <?php
@@ -19,7 +19,7 @@ $sql="SELECT * FROM kelas ORDER by tahun desc, semester desc";
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Kelas</h1>
+                        <h1>Angsuran</h1>
                     </div>
                 </div>
             </div>
@@ -40,10 +40,10 @@ $sql="SELECT * FROM kelas ORDER by tahun desc, semester desc";
             <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <strong>Data Kelas</strong>
+                    <strong>Data Angsuran</strong>
                 </div>
                 <div class="pull-right">
-                    <a href="kelas_tambah.php" class="btn btn-success btn-sm"> 
+                    <a href="angsuran_tambah.php" class="btn btn-success btn-sm"> 
                         <i class="fa fa-plus">Add</i>
                     </a>
                 </div>
@@ -52,12 +52,11 @@ $sql="SELECT * FROM kelas ORDER by tahun desc, semester desc";
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Kode Kelas</th>
-                            <th>Kode Matkul</th>
-                            <th>Nama Matkul</th>
-                            <th>Tahun</th>
-                            <th>Semester</th>
-                            <th>Sks</th>
+                            <th>Angsuran</th>
+                            <th>Nominal</th>
+                            <th>Denda</th>
+                            <th>Sisa Angsuran</th>
+                            <th>Jumlah Sisa Angsuran</th>
                             <th>Action</th>
                     
                         </tr>
@@ -70,14 +69,13 @@ $sql="SELECT * FROM kelas ORDER by tahun desc, semester desc";
                             while($row = $result->fetch_assoc()){
                         ?>
                             <tr>
-                                <td><?php echo $row ['kode_kelas'] ?></td>
-                                <td><?php echo $row ['kode_matkul'] ?></td>
-                                <td><?php echo $row ['nama_matkul'] ?></td>
-                                <td><?php echo $row ['tahun'] ?></td>
-                                <td><?php echo $row ['semester'] ?></td>
-                                <td><?php echo $row ['sks'] ?></td>
-                                <td><a href="kelas_edit.php?kelas_id=<?= $row['kelas_id']; ?>" class="btn btn-warning" onClick="return edit()">Edit</a>
-                                    <a href="kelas_detail.php?kelas_id=<?= $row['kelas_id']; ?>" class="btn btn-primary" class="btn btn-primary">Detail</a>
+                                <td><?php echo $row ['angsuran'] ?></td>
+                                <td><?php echo $row ['nominal'] ?></td>
+                                <td><?php echo $row ['denda'] ?></td>
+                                <td><?php echo $row ['sisa_angsuran'] ?></td>
+                                <td><?php echo $row ['jmlh_sisa_angsuran'] ?></td>
+                                <td><a href="kelas_edit.php?kelas_id=<?= $row['angsuran_id']; ?>" class="btn btn-warning" onClick="return edit()">Edit</a>
+                                    <a href="kelas_detail.php?kelas_id=<?= $row['angsuran_id']; ?>" class="btn btn-primary" class="btn btn-primary">Detail</a>
                                 </td>
                             </tr>
 

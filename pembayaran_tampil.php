@@ -18,7 +18,7 @@ require_once('head.php');
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Peserta Kelas</h1>
+                        <h1>Peserta Angsuran</h1>
                     </div>
                 </div>
             </div>
@@ -39,10 +39,10 @@ require_once('head.php');
             <div class="card">
             <div class="card-header">
                 <div class="pull-left">
-                    <strong>Data Peserta Kelas</strong>
+                    <strong>Data Peserta Angsuran</strong>
                 </div>
                 <div class="pull-right">
-                    <a href="krs_tambah.php" class="btn btn-success btn-sm"> 
+                    <a href="pembayaran_tambah.php" class="btn btn-success btn-sm"> 
                         <i class="fa fa-plus">Add</i>
                     </a>
                 </div>
@@ -54,25 +54,25 @@ require_once('head.php');
     <thead>
     <tr>
             <th>No</th>
-            <th>Kelas</th>
+            <th>Angsuran</th>
             <th>Nama</th>
             <th>Aksi</th>
     </tr>
     </thead>
     <?php
             $no = 1;
-            $koneksi = new mysqli ("localhost","root","","si_absensi");
-            $sql = mysqli_query($koneksi, "SELECT * from krs join kelas on kelas.kelas_id=krs.kelas_id join mahasiswa on mahasiswa.mahasiswa_id=krs.mahasiswa_id");
+            $koneksi = new mysqli ("localhost","root","","angsuran");
+            $sql = mysqli_query($koneksi, "SELECT * from pembayaran join angsuran on angsuran.angsuran_id=pembayaran.angsuran_id join mahasiswa on mahasiswa.mahasiswa_id=pembayaran.mahasiswa_id ORDER by angsuran.angsuran");
             
 
             while ($data = $sql->fetch_assoc()){
     ?>  
     <tr>
         <td><?php echo $no++;?></td>
-        <td><?php echo $data['nama_matkul'];?></td>
+        <td><?php echo $data['angsuran'];?></td>
         <td><?php echo $data['nama'];?></td>
         <td>
-            <a href="krs_hapus.php?id=<?php echo $data['krs_id'];?>"><button class="btn btn-danger">Delete</button></a>       
+            <a href="pembayaran_hapus.php?id=<?php echo $data['pembayaran_id'];?>"><button class="btn btn-danger">Delete</button></a>       
         </td>
     </tr>
     <?php 

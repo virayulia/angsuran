@@ -20,14 +20,14 @@
                     </li>
                     <?php
                     if(@$_SESSION['level']=='admin') {?>
-                    <li>
+                    <!-- <li>
                         <a href="angsuran.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Angsuran </a>
+                    </li> -->
+                    <li>
+                        <a href="angsuran_tampil.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Angsuran </a>
                     </li>
                     <li>
-                        <a href="kelas_tampil.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Kelas </a>
-                    </li>
-                    <li>
-                        <a href="krs_tampil.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Peserta Kelas </a>
+                        <a href="pembayaran_tampil.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Pembayaran </a>
                     </li>
                     <li>
                         <a href="pertemuan_tampill.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Pertemuan </a>
@@ -36,7 +36,7 @@
                     } 
                     else {?>
                     <li>
-                        <a href="tampil_mhs.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Mahasiswa </a>
+                        <a href="tampil_mhs.php"> <i class="menu-icon fa fa-puzzle-piece"></i>Pembayaran </a>
                     </li>
                     <?php
                     }?>
