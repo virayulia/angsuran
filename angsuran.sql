@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 04:16 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Waktu pembuatan: 08 Jan 2022 pada 04.04
+-- Versi server: 10.4.22-MariaDB
+-- Versi PHP: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `si_absensi`
+-- Database: `angsuran`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `absensi`
+-- Struktur dari tabel `absensi`
 --
 
 CREATE TABLE `absensi` (
@@ -39,7 +39,29 @@ CREATE TABLE `absensi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kelas`
+-- Struktur dari tabel `angsuran`
+--
+
+CREATE TABLE `angsuran` (
+  `id_angsuran` int(11) NOT NULL,
+  `angsuran` varchar(255) NOT NULL,
+  `nominal` int(11) NOT NULL,
+  `denda` int(11) NOT NULL,
+  `sisa_angsuran` int(11) NOT NULL,
+  `jmlh_sisa_angsuran` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `angsuran`
+--
+
+INSERT INTO `angsuran` (`id_angsuran`, `angsuran`, `nominal`, `denda`, `sisa_angsuran`, `jmlh_sisa_angsuran`) VALUES
+(3, 'Angsuran 2', 20000000, 2000, 22, 222000000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -53,7 +75,7 @@ CREATE TABLE `kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kelas`
+-- Dumping data untuk tabel `kelas`
 --
 
 INSERT INTO `kelas` (`kelas_id`, `kode_kelas`, `kode_matkul`, `nama_matkul`, `tahun`, `semester`, `sks`) VALUES
@@ -66,7 +88,7 @@ INSERT INTO `kelas` (`kelas_id`, `kode_kelas`, `kode_matkul`, `nama_matkul`, `ta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `krs`
+-- Struktur dari tabel `krs`
 --
 
 CREATE TABLE `krs` (
@@ -76,7 +98,7 @@ CREATE TABLE `krs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `krs`
+-- Dumping data untuk tabel `krs`
 --
 
 INSERT INTO `krs` (`krs_id`, `kelas_id`, `mahasiswa_id`) VALUES
@@ -96,7 +118,7 @@ INSERT INTO `krs` (`krs_id`, `kelas_id`, `mahasiswa_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mahasiswa`
+-- Struktur dari tabel `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -109,7 +131,7 @@ CREATE TABLE `mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mahasiswa`
+-- Dumping data untuk tabel `mahasiswa`
 --
 
 INSERT INTO `mahasiswa` (`mahasiswa_id`, `nama`, `nim`, `email`, `tipe`, `password`) VALUES
@@ -121,7 +143,7 @@ INSERT INTO `mahasiswa` (`mahasiswa_id`, `nama`, `nim`, `email`, `tipe`, `passwo
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pertemuan`
+-- Struktur dari tabel `pertemuan`
 --
 
 CREATE TABLE `pertemuan` (
@@ -133,7 +155,7 @@ CREATE TABLE `pertemuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pertemuan`
+-- Dumping data untuk tabel `pertemuan`
 --
 
 INSERT INTO `pertemuan` (`pertemuan_id`, `kelas_id`, `pertemuan_ke`, `tanggal`, `materi`) VALUES
@@ -151,7 +173,7 @@ INSERT INTO `pertemuan` (`pertemuan_id`, `kelas_id`, `pertemuan_ke`, `tanggal`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -162,7 +184,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `level`) VALUES
@@ -176,7 +198,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `level`) VALUES
 --
 
 --
--- Indexes for table `absensi`
+-- Indeks untuk tabel `absensi`
 --
 ALTER TABLE `absensi`
   ADD PRIMARY KEY (`absensi_id`),
@@ -184,13 +206,19 @@ ALTER TABLE `absensi`
   ADD KEY `pertemuan_id` (`pertemuan_id`);
 
 --
--- Indexes for table `kelas`
+-- Indeks untuk tabel `angsuran`
+--
+ALTER TABLE `angsuran`
+  ADD PRIMARY KEY (`id_angsuran`);
+
+--
+-- Indeks untuk tabel `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`kelas_id`);
 
 --
--- Indexes for table `krs`
+-- Indeks untuk tabel `krs`
 --
 ALTER TABLE `krs`
   ADD PRIMARY KEY (`krs_id`),
@@ -198,60 +226,66 @@ ALTER TABLE `krs`
   ADD KEY `mahasiswa_id` (`mahasiswa_id`);
 
 --
--- Indexes for table `mahasiswa`
+-- Indeks untuk tabel `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`mahasiswa_id`);
 
 --
--- Indexes for table `pertemuan`
+-- Indeks untuk tabel `pertemuan`
 --
 ALTER TABLE `pertemuan`
   ADD PRIMARY KEY (`pertemuan_id`),
   ADD KEY `pertemuan_ibfk_1` (`kelas_id`) USING BTREE;
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `krs`
+-- AUTO_INCREMENT untuk tabel `angsuran`
+--
+ALTER TABLE `angsuran`
+  MODIFY `id_angsuran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT untuk tabel `krs`
 --
 ALTER TABLE `krs`
   MODIFY `krs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `absensi`
+-- Ketidakleluasaan untuk tabel `absensi`
 --
 ALTER TABLE `absensi`
   ADD CONSTRAINT `absensi_ibfk_1` FOREIGN KEY (`krs_id`) REFERENCES `krs` (`krs_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `absensi_ibfk_2` FOREIGN KEY (`pertemuan_id`) REFERENCES `pertemuan` (`pertemuan_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `krs`
+-- Ketidakleluasaan untuk tabel `krs`
 --
 ALTER TABLE `krs`
   ADD CONSTRAINT `krs_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `krs_ibfk_2` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`mahasiswa_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `pertemuan`
+-- Ketidakleluasaan untuk tabel `pertemuan`
 --
 ALTER TABLE `pertemuan`
   ADD CONSTRAINT `pertemuan_ibfk_1` FOREIGN KEY (`kelas_id`) REFERENCES `kelas` (`kelas_id`) ON DELETE CASCADE ON UPDATE CASCADE;
