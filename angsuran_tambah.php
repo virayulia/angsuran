@@ -66,22 +66,6 @@ require_once('head.php');
                          <option value="Angsuran 10">Angsuran 10</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                      <label for="nominal" class="form-label">Nominal</label>
-                      <input type="text" class="form-control" name="nominal"  autocomplete='off' required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="denda" class="form-label">Denda</label>
-                        <input type="text" class="form-control" name="denda" autocomplete='off' required>
-                      </div>
-                      <div class="mb-3">
-                        <label for="sisa_angsuran" class="form-label">Sisa Angsuran</label>
-                        <input type="text" class="form-control" name="sisa_angsuran" autocomplete='off' required>
-                      </div>
-                      <div class="mb-3">
-                        <label for="jmlh_sisa_angsuran" class="form-label">Jumlah Sisa Angsuran</label>
-                        <input type="text" class="form-control" name="jmlh_sisa_angsuran" autocomplete='off' required>
-                      </div>
                     <button type="submit" class="btn btn-primary" name="submit">Submit</button>
                 </form>
             </div>
@@ -91,19 +75,7 @@ require_once('head.php');
 
     if (isset($_POST['submit'])) {
         $angsuran = $_POST['angsuran'];
-        $nominal = $_POST['nominal'];
-        $denda = $_POST['denda'];
-        $sisa_angsuran = $_POST['sisa_angsuran'];
-        $jmlh_sisa_angsuran = $_POST['jmlh_sisa_angsuran'];
 
-        $cek = mysqli_query($db , "SELECT angsuran_id FROM angsuran WHERE angsuran_id='$angsuran_id'");
-         if(mysqli_fetch_assoc($cek)){    
-            echo "
-            <script>
-            alert('ID Angsuran sudah dipakai!!');
-            </script> ";
-         }
-         else {
             $query = mysqli_query($db,"SELECT max(angsuran_id) as kodeTerbesar FROM angsuran");
             $data = mysqli_fetch_array($query);
             $urutan = $data['kodeTerbesar'];
@@ -111,7 +83,7 @@ require_once('head.php');
             $urutan++; 
             $angsuran_id = $urutan;
             
-            $result = mysqli_query($db,"INSERT INTO angsuran VALUES('$angsuran_id','$angsuran','$nominal','$denda','$sisa_angsuran','$jmlh_sisa_angsuran')") or die(mysqli_error($db));
+            $result = mysqli_query($db,"INSERT INTO angsuran VALUES('$angsuran_id','$angsuran')") or die(mysqli_error($db));
             
             if ($result > 0) {
                 echo "
@@ -128,7 +100,7 @@ require_once('head.php');
                 </script>
                 ";
             }
-         }
+         
         }
         ?>
 

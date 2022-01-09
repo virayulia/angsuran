@@ -23,6 +23,11 @@
 if(isset($_POST['submit'])){
     $angsuran_id = $_POST ['angsuran_id'];
     $mahasiswa_id = $_POST ['mahasiswa_id'];
+    $nominal = $_POST['nominal'];
+    $denda = $_POST['denda'];
+    $sisa_angsuran = $_POST['sisa_angsuran'];
+    $jmlh_sisa_angsuran = $_POST['jmlh_sisa_angsuran'];
+
   
 
     if ($angsuran_id!=null && $mahasiswa_id!=null){ //untuk cek apakah data telah diinputkan
@@ -33,7 +38,7 @@ if(isset($_POST['submit'])){
                 $msg = 1;
             } 
             else{
-                $create="INSERT into pembayaran(angsuran_id, mahasiswa_id) values('$angsuran_id','$mahasiswa_id')";
+                $create="INSERT into pembayaran(angsuran_id, mahasiswa_id, nominal, denda, sisa_angsuran, jmlh_sisa_angsuran) values('$angsuran_id','$mahasiswa_id', '$nominal','$denda','$sisa_angsuran','$jmlh_sisa_angsuran')";
                 $sql = mysqli_query($db,$create);
                 if ($sql){
                     $msg = 2;
@@ -42,7 +47,7 @@ if(isset($_POST['submit'])){
         }
 
         else {        
-        $create="INSERT into pembayaran(angsuran_id, mahasiswa_id) values('$angsuran_id','$mahasiswa_id')";
+        $create="INSERT into pembayaran(angsuran_id, mahasiswa_id, nominal, denda, sisa_angsuran, jmlh_sisa_angsuran) values('$angsuran_id','$mahasiswa_id', '$nominal','$denda','$sisa_angsuran','$jmlh_sisa_angsuran')";
         $sql = mysqli_query($db,$create);
             if ($sql){
                 $msg = 2;
@@ -159,6 +164,22 @@ if(isset($_POST['submit'])){
                 ?>
             </select>
         </div>
+        <div class="mb-3">
+                      <label for="nominal" class="form-label">Nominal</label>
+                      <input type="text" class="form-control" name="nominal"  autocomplete='off' required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="denda" class="form-label">Denda</label>
+                        <input type="text" class="form-control" name="denda" autocomplete='off' required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="sisa_angsuran" class="form-label">Sisa Angsuran</label>
+                        <input type="text" class="form-control" name="sisa_angsuran" autocomplete='off' required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="jmlh_sisa_angsuran" class="form-label">Jumlah Sisa Angsuran</label>
+                        <input type="text" class="form-control" name="jmlh_sisa_angsuran" autocomplete='off' required>
+                      </div>
         <button type="submit" class="btn btn-primary" name="submit">Submit</button>
     </form> 
     </div>

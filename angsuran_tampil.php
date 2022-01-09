@@ -52,28 +52,24 @@ $sql="SELECT * FROM angsuran ORDER by angsuran asc";
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>No. </th>
                             <th>Angsuran</th>
-                            <th>Nominal</th>
-                            <th>Denda</th>
-                            <th>Sisa Angsuran</th>
-                            <th>Jumlah Sisa Angsuran</th>
                             <th>Action</th>
                     
                         </tr>
                     </thead>
                     <tbody>
                         <?php
+                        $i=1;
                             if(!$result = $db->query($sql)){
                                 die('Gagal Meminta Data');
                             }
                             while($row = $result->fetch_assoc()){
                         ?>
                             <tr>
+                                <td><?php echo $i++ ?></td>
                                 <td><?php echo $row ['angsuran'] ?></td>
-                                <td><?php echo $row ['nominal'] ?></td>
-                                <td><?php echo $row ['denda'] ?></td>
-                                <td><?php echo $row ['sisa_angsuran'] ?></td>
-                                <td><?php echo $row ['jmlh_sisa_angsuran'] ?></td>
+                                
                                 <td><a href="kelas_edit.php?kelas_id=<?= $row['angsuran_id']; ?>" class="btn btn-warning" onClick="return edit()">Edit</a>
                                     <a href="kelas_detail.php?kelas_id=<?= $row['angsuran_id']; ?>" class="btn btn-primary" class="btn btn-primary">Detail</a>
                                 </td>

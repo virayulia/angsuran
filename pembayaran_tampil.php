@@ -56,6 +56,10 @@ require_once('head.php');
             <th>No</th>
             <th>Angsuran</th>
             <th>Nama</th>
+            <th>Nominal</th>
+            <th>Denda</th>
+            <th>Sisa Angsuran</th>
+            <th>Jumlah Sisa Angsuran</th>
             <th>Aksi</th>
     </tr>
     </thead>
@@ -71,12 +75,23 @@ require_once('head.php');
         <td><?php echo $no++;?></td>
         <td><?php echo $data['angsuran'];?></td>
         <td><?php echo $data['nama'];?></td>
+        <td><?php echo $data['nominal'];?></td>
+        <td><?php echo $data['denda'];?></td>
+        <td><?php echo $data['sisa_angsuran'];?></td>
+        <td><?php echo $data['jmlh_sisa_angsuran'];?></td>
         <td>
-            <a href="pembayaran_hapus.php?id=<?php echo $data['pembayaran_id'];?>"><button class="btn btn-danger">Delete</button></a>       
+            <a href="pembayaran_hapus.php?id=<?php echo $data['pembayaran_id'];?>"><button class="btn btn-danger" onClick="return edit()">Delete</button></a>       
         </td>
     </tr>
     <?php 
     }
     ?>
+    <script>
+        function edit(){
+            tanya = confirm('Apakah Anda Yakin Ingin Hapus Data?');
+            if(tanya==true) return true;
+            else return false;
+        }
+    </script>
 </table>
    
